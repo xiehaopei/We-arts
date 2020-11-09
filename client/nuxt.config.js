@@ -9,17 +9,21 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      { src: '//at.alicdn.com/t/font_2191685_0yj47w15ffjp.js' }
     ]
   },
 
-  loading: './components/LoadingTab.vue',
+  loading: '@/components/LoadingTab.vue',
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
+    '@/assets/css/main.css'
   ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: './plugins/router.js', ssr: false }
+    { src: '@/plugins/router.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

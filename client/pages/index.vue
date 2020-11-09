@@ -5,7 +5,15 @@
         We-arts
       </h1>
       <div class="links">
-        <a>1</a>
+        <a><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-qq" />
+        </svg></a>
+        <a><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-email" />
+        </svg></a>
+        <a><svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-github" />
+        </svg></a>
       </div>
     </div>
   </div>
