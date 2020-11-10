@@ -11,7 +11,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '//at.alicdn.com/t/font_2191685_0yj47w15ffjp.js' }
+      { src: '//at.alicdn.com/t/font_2191685_jyazhscamro.js' }
     ]
   },
 
@@ -23,6 +23,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    { src: '@/plugins/component.js', ssr: true },
     { src: '@/plugins/router.js', ssr: false }
   ],
 

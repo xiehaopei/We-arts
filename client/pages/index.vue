@@ -2,27 +2,20 @@
   <div class="container">
     <div>
       <h1 class="title">
-        We-arts
+        We-Arts
       </h1>
-      <div class="links">
-        <a><svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-qq" />
-        </svg></a>
-        <a><svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-email" />
-        </svg></a>
-        <a><svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-github" />
-        </svg></a>
-      </div>
+      <h3 class="subtitle">
+        智者向内需求力量
+      </h3>
+      <Icon class="links" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+export default {
 
-export default Vue.extend({})
+}
 </script>
 
 <style>
@@ -55,7 +48,7 @@ export default Vue.extend({})
 
 .subtitle {
   font-weight: 300;
-  font-size: 42px;
+  font-size: 30px;
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
@@ -63,5 +56,6 @@ export default Vue.extend({})
 
 .links {
   padding-top: 15px;
+  margin: 0 auto;
 }
 </style>
