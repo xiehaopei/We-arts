@@ -1,12 +1,8 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">
-        We-Arts
-      </h1>
-      <h3 class="subtitle">
-        智者向内需求力量
-      </h3>
+      <h1 class="title">We-Arts</h1>
+      <h3 class="subtitle">智者向内需求力量</h3>
       <Icon class="links" />
     </div>
   </div>
@@ -14,8 +10,8 @@
 
 <script lang="ts">
 export default {
-
-}
+  
+};
 </script>
 
 <style>
@@ -29,16 +25,8 @@ export default {
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
