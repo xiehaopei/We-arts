@@ -4,14 +4,14 @@ export default {
     title: 'We-arts-client',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no' },
+      { hid: 'description', name: 'description', content: '' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '//at.alicdn.com/t/font_2191685_jyazhscamro.js' }
+      { src: '//at.alicdn.com/t/font_2191685_5dojeocevm9.js' },
     ]
   },
 
@@ -24,7 +24,8 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     { src: '@/plugins/component.js', ssr: true },
-    { src: '@/plugins/router.js', ssr: false }
+    { src: '@/plugins/router.js', ssr: false },
+    { src: '@/plugins/flexible.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

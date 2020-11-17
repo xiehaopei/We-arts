@@ -25,11 +25,12 @@
 .links{
   display: flex;
   justify-content: space-around;
-  width: 50%;
+  width: 3rem;
 }
 .icon {
   cursor: pointer;
-
+  width: 0.4rem;
+  height: 0.4rem;
   &-hover {
     display: none;
   }
