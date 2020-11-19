@@ -1,5 +1,5 @@
 {
-  "name": "WeArtsClient",
+  "name": "we-art-client",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -14,9 +14,9 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/axios": "^5.12.2",
+    "@vue/composition-api": "^1.0.0-beta.19",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
-    "parallax-js": "^3.1.0"
+    "nuxt": "^2.14.6"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",

@@ -22,26 +22,26 @@
 </template>
 
 <style lang="scss" scoped>
-.links{
-  display: flex;
-  justify-content: space-around;
-  width: 3rem;
+.links {
+	display: flex;
+	justify-content: space-around;
+	width: 3rem;
 }
 .icon {
-  cursor: pointer;
-  width: 0.4rem;
-  height: 0.4rem;
-  &-hover {
-    display: none;
-  }
+	width: .4rem;
+	height: .4rem;
+	cursor: pointer;
+	&-hover {
+		display: none;
+	}
 
-  &:hover{
-    .icon-static{
-      display: none;
-    }
-    .icon-hover{
-      display: block;
-    }
-  }
+	&:hover {
+		.icon-static {
+			display: none;
+		}
+		.icon-hover {
+			display: block;
+		}
+	}
 }
 </style>

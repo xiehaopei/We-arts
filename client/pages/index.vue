@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Nav></Nav>
     <div class="header">
       <h1 class="title">We-Arts</h1>
       <h3 class="subtitle">智者向内寻求力量</h3>
@@ -14,43 +15,43 @@ export default {};
 
 <style lang="scss">
 .container {
-	margin: 0 auto;
-	width: 100%;
-	min-height: 100vh;
-	text-align: center;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
 
-	.header {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		width: 100%;
-		height: 70vh;
-		background: url(/img/index-bg.png);
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 70vh;
+    background: url(/img/index-bg.png);
 
-		.title {
-			display: block;
-			font-family: "Quicksand", "Source Sans Pro", -apple-system,
-			BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-			sans-serif;
-			font-weight: 300;
-			font-size: 1rem;
-			color: #fff;
-			letter-spacing: 1px;
-		}
+    .title {
+      display: block;
+      font-family: 'Quicksand', 'Source Sans Pro', -apple-system,
+        BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+        sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: #fff;
+      letter-spacing: 1px;
+    }
 
-		.subtitle {
-			padding-bottom: 15px;
-			font-weight: 300;
-			font-size: 0.3rem;
-			color: #fff;
-			word-spacing: 5px;
-		}
+    .subtitle {
+      padding-bottom: 0.15rem;
+      font-weight: 300;
+      font-size: 0.3rem;
+      color: #fff;
+      word-spacing: 5px;
+    }
 
-		.links {
-			margin: 0 auto;
-			padding-top: 15px;
-		}
-	}
+    .links {
+      margin: 0 auto;
+      padding-top: 0.15rem;
+    }
+  }
 }
 </style>
