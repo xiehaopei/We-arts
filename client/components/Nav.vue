@@ -9,11 +9,20 @@
     <div class="nav">
       <ul class="nav-list">
         <li v-for="item in navList" :key="item.url">
-          <a>{{ item.title }}</a>
+          <a>
+            <svg class="icon" aria-hidden="true">
+              <use :xlink:href="item.icon" />
+            </svg>
+          {{ item.title }}
+          </a>
         </li>
       </ul>
       <div class="quote">
-        <span>Everywhere in the world has a similar life.</span>
+        <p>&copy;2020 We-Arts.AllRightsReserved.</p>
+        <p>
+          <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">粤ICP备2020108324号</a>
+        </p>
+        <p>Designed by Haopei Xie</p>
       </div>
     </div>
   </div>
@@ -28,26 +37,32 @@ export default {
         {
           title: "Home",
           url: "/index",
+          icon:"#icon-home"
         },
         {
-          title: "Article",
+          title: "Articles",
           url: "/article",
+          icon:"#icon-articles"
         },
         {
           title: "Archives",
           url: "/archives",
+          icon:"#icon-archives"
         },
         {
           title: "TimeLine",
           url: "/timeLine",
+          icon:"#icon-time"
         },
         {
           title: "Links",
           url: "/links",
+          icon:"#icon-links"
         },
         {
           title: "About",
           url: "/about",
+          icon:"#icon-about"
         },
       ],
     };
@@ -55,7 +70,7 @@ export default {
   methods: {
     toggle() {
       this.showMenu = !this.showMenu;
-      const nav = document.getElementsByClassName('nav')[0];
+      const nav = document.querySelector('.nav');
       if(this.showMenu){
         nav.style.top = '0'
       }else{
@@ -109,10 +124,24 @@ export default {
     position: absolute;
     bottom: 30px;
     width: 100%;
+    padding-top: 10px;
     text-align: center;
     color: #999;
-    span {
+    p {
       font-size: 16px;
+      a {
+        color: #999;
+      }
+    }
+
+    &::before {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      border-bottom: 4px solid #666;
+      width: 15%;
+      content: '';
+      transform: translateX(-50%);
     }
   }
   .nav-list {
@@ -122,6 +151,7 @@ export default {
     text-align: center;
     li {
       display: inline-block;
+      position: relative;
       list-style: none;
       margin: 0 20px 20px;
       a {
@@ -132,6 +162,30 @@ export default {
         &:hover {
           color: #222;
         }
+        svg{
+          width: 20px;
+          height:20px;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        left: 100%;
+        top: 0;
+        border-bottom: 4px solid #f00;
+        width: 0;
+        height: 100%;
+        content: '';
+        transition: 0.2s all linear;
+      }
+
+      &:hover::before {
+        left: 0;
+        top: 0;
+        z-index: -1;
+        border-bottom-color: #1e88da;
+        width: 100%;
+        transition-delay: 0.1s;
       }
     }
   }

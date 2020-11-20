@@ -19,3 +19,7 @@ html, body, p, input, textarea, button, div, span {
   fill: currentColor;
   overflow: hidden;
 }
+
+a{
+	text-decoration: none;
+}
