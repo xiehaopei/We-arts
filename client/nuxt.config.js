@@ -11,7 +11,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '//at.alicdn.com/t/font_2191685_en0ubcmukih.js' },
+      { src: '//at.alicdn.com/t/font_2191685_5qa6job04eh.js' },
     ]
   },
 
@@ -25,7 +25,8 @@ export default {
   plugins: [
     { src: '@/plugins/component.js', ssr: true },
     { src: '@/plugins/router.js', ssr: false },
-    { src: '@/plugins/flexible.js', ssr: false }
+    { src: '@/plugins/flexible.js', ssr: false },
+    { src: '@/plugins/common.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

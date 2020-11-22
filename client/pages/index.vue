@@ -6,6 +6,7 @@
       <h3 class="subtitle">智者向内寻求力量</h3>
       <Icon class="links" />
     </div>
+    <backTop></backTop>
   </div>
 </template>
 
