@@ -1,25 +1,47 @@
-html, body, p, input, textarea, button, div, span {
-	font-family: "eafont", "Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-	word-spacing: 1px;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
+html,
+body,
+p,
+input,
+textarea,
+button,
+div,
+span {
+  font-family: "eafont", "Hiragino Sans GB", "Hiragino Sans GB W3",
+    "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
-*{
-	margin: 0;
-	padding: 0;
-	font-size: 14px;
-	box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
 }
 
 .icon {
-  width: 30px; height: 30px;
+  width: 30px;
+  height: 30px;
   fill: currentColor;
   overflow: hidden;
-}
-
-a{
-	text-decoration: none;
 }

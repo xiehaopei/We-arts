@@ -11,7 +11,7 @@
         <use class="icon-hover" xlink:href="#icon-we-chat-hover" />
       </svg>
     </a>
-    <a href="mailto:15907678645@163.com">
+    <a>
       <div class="tooltip">15907678645@163.com</div>
       <svg class="icon" aria-hidden="true">
         <use class="icon-static" xlink:href="#icon-email" />

@@ -11,7 +11,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '//at.alicdn.com/t/font_2191685_5qa6job04eh.js' },
+      { src: '//at.alicdn.com/t/font_2191685_tg2x80jvb4q.js' },
     ]
   },
 
