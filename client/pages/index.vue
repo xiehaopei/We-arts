@@ -16,10 +16,7 @@
           <div
             class="discribe"
           >贾宝玉病加重，直至奄奄一息，癞头僧持通灵宝玉引他入太虚幻境变形的真如福地梦中。梦醒后发奋读书。次年参加乡试，中第七名举人。宝钗已有身孕，而贾宝玉应试后走失。贾政扶贾母灵柩至金陵安葬，将归京城，雪中泊舟常州毗陵驿。见一人来到船头，光头赤足，披大红猩猩毡斗篷，向贾政倒身拜了四拜，站起来打了个问讯，细视之，正是贾宝玉。贾政忙问，贾宝玉却不言语，似喜似悲。贾政再问，贾宝玉未及回答，忽被一僧一道左右夹住飘然登岸而去，闻其作歌云“归大荒”。贾政追之不及，“只见白茫茫一片旷野”而已。后人见了这本小说，亦题诗一绝云：“说到辛酸处，荒唐愈可悲。由来同一梦，休笑世人痴！”</div>
-          <div class="tags">
-            <Tag color="red" tagName="JavaScript"></Tag>
-            <Tag color="blue" tagName="CSS"></Tag>
-          </div>
+          <Tags :tags="tags"></Tags>
           <div class="footer">
             <div class="time">
               <svg class="icon" aria-hidden="true">
@@ -42,7 +39,17 @@
 </template>
 
 <script lang="ts">
-export default {};
+export default {
+  data() {
+    return {
+      tags:[
+        {bgcolor:'red',tagName:'JavaScript'},
+        {bgcolor:'blue',tagName:'CSS'},
+        {bgcolor:'yellow',tagName:'HTML'}
+      ]
+    }
+  },
+};
 </script>
 
 <style lang="scss">
@@ -136,12 +143,6 @@ export default {};
 
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
-        }
-
-        .tags {
-          padding: 0.1rem;
-          display: flex;
-          justify-content: flex-start;
         }
 
         .footer {
