@@ -9,12 +9,12 @@
     <div class="nav">
       <ul class="nav-list">
         <li v-for="item in navList" :key="item.url">
-          <a>
+          <nuxt-link :to="item.url">
             <svg class="icon" aria-hidden="true">
               <use :xlink:href="item.icon" />
             </svg>
           {{ item.title }}
-          </a>
+          </nuxt-link>
         </li>
       </ul>
       <div class="quote">
@@ -36,7 +36,7 @@ export default {
       navList: [
         {
           title: "Home",
-          url: "/index",
+          url: "/",
           icon:"#icon-home"
         },
         {
