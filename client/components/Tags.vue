@@ -24,6 +24,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   padding: 0.1rem;
+  font-size: 0.4rem;
 
   .tag {
     margin: 0 10px;

@@ -136,8 +136,9 @@ export default {
           display: -webkit-box;
           overflow: hidden;
           padding: 0 0.1rem;
-          max-height: 0.44rem;
-          line-height: 0.22rem;
+          max-height: 0.5rem;
+          line-height: 0.25rem;
+          font-size: 0.15rem;
           text-overflow: ellipsis;
           word-wrap: break-word;
 
