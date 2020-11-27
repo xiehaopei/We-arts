@@ -1,8 +1,8 @@
-const mongoose = requrie('mongoose');
+const mongoose = require('mongoose');
 
 /**
  * @description: 文章模块
- * @param {aId} 文章id
+ * @param {_id} 文章id
  * @param {title} 文章标题
  * @param {words} 文章字数
  * @param {content} 文章内容
@@ -16,13 +16,15 @@ const mongoose = requrie('mongoose');
  * @return {*}
  */
 const Schema = new mongoose.Schema({
-  aId: Number,
-  title: String,
+  title: {
+    type: String,
+    require: true,
+  },
   words: Number,
   content: String,
   describe: String,
   contentHtml: String,
-  time: String,
+  time: Date,
   like: {
     type: Number,
     default: 0
@@ -41,7 +43,10 @@ const Schema = new mongoose.Schema({
       default: ''
     }
   },
-  tags: String,
+  tags: {
+    type: [String],
+    default: []
+  },
 });
 
 module.exports = mongoose.model('Article', Schema);
