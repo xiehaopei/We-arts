@@ -54,4 +54,13 @@ const deleteArticleById = async (req, res) => {
   }
 }
 
-module.exports = { getArticleList, getArticleById, createArticle, deleteArticleById }
+const getArticleListByTag = async (req, res) => {
+  try {
+    const result = await Article.find({ tags: req.params.tag })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+module.exports = { getArticleList, getArticleById, createArticle, deleteArticleById, getArticleListByTag }
