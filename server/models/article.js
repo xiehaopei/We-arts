@@ -1,3 +1,12 @@
+/*
+ * @Author: Haopei Xie
+ * @Date: 2020-11-27 23:26:19
+ * @LastEditTime: 2020-11-30 20:57:46
+ * @LastEditors: Haopei Xie
+ * @Description: Article Model
+ * @FilePath: \We-arts\server\models\article.js
+ * @
+ */
 const mongoose = require('mongoose');
 
 /**

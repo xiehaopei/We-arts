@@ -11,6 +11,7 @@ const getArticleList = async (req, res) => {
 const getArticleById = async (req, res) => {
   try {
     const result = await Article.findById(req.params.id);
+    result.time = getTime(result.time);
     res.send(result);
   } catch (error) {
     throw error
