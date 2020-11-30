@@ -11,6 +11,7 @@ const getArticleList = async (req, res) => {
 const getArticleById = async (req, res) => {
   try {
     const result = await Article.findById(req.params.id);
+    result.time = getTime(result.time);
     res.send(result);
   } catch (error) {
     throw error
@@ -54,4 +55,13 @@ const deleteArticleById = async (req, res) => {
   }
 }
 
-module.exports = { getArticleList, getArticleById, createArticle, deleteArticleById }
+const getArticleListByTag = async (req, res) => {
+  try {
+    const result = await Article.find({ tags: req.params.tag })
+    res.send(result)
+  } catch (error) {
+    throw error
+  }
+}
+
+module.exports = { getArticleList, getArticleById, createArticle, deleteArticleById, getArticleListByTag }
