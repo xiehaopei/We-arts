@@ -1,5 +1,7 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <div>
+    <el-button type="primary">element-plus</el-button>
+  </div>
 </template>
 
 <script>
