@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-27 23:26:19
- * @LastEditTime: 2020-11-30 20:57:46
+ * @LastEditTime: 2020-12-03 21:12:18
  * @LastEditors: Haopei Xie
  * @Description: Article Model
  * @FilePath: \We-arts\server\models\article.js
@@ -33,7 +33,10 @@ const Schema = new mongoose.Schema({
   content: String,
   describe: String,
   contentHtml: String,
-  time: Date,
+  time: {
+    type: Date,
+    default: Date.now
+  },
   like: {
     type: Number,
     default: 0

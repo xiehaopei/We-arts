@@ -1,11 +1,16 @@
 <template>
-  <div>
-    <el-button type="primary">element-plus</el-button>
-  </div>
+  <router-view></router-view>
 </template>
-
 <script>
+export default {
+  name: 'App'
+};
 </script>
 
-<style>
+<style lang="scss">
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 </style>
