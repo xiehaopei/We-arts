@@ -26,8 +26,8 @@ import router from '../router.js';
 
 export default {
   setup() {
-    const user = '';
-    const password = '';
+    const user = 'root';
+    const password = 'admin';
     const img0 = ref(null);
     const img1 = ref(null);
     const img2 = ref(null);
