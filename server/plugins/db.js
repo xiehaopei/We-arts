@@ -10,6 +10,7 @@ module.exports = app => {
     useUnifiedTopology: true,
     useFindAndModify: false
   })
+  mongoose.set('useCreateIndex', true);
   mongoose.connection.on("connected", function () {
     console.log("数据库连接成功")
   })

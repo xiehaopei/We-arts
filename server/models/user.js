@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-05 16:54:06
- * @LastEditTime: 2020-12-05 17:04:58
+ * @LastEditTime: 2020-12-07 23:58:34
  * @LastEditors: Haopei Xie
  * @Description: User Model
  * @FilePath: \We-arts\server\models\user.js
@@ -20,7 +20,8 @@ const mongoose = require('mongoose');
 const Schema = new mongoose.Schema({
   username: {
     type: String,
-    require: true
+    require: true,
+    unique: true
   },
   password: {
     type: String,

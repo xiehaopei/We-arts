@@ -24,4 +24,26 @@ const addUser = async (req, res) => {
   }
 }
 
-module.exports = { getUserList, addUser }
+const findUser = async (req, res) => {
+  const params = {
+    username: req.body.username,
+    password: req.body.password
+  }
+  try {
+    const result = await User.find(params);
+    res.send(result);
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+const deleteUser = async (req, res) => {
+  try {
+    const result = await User.findByIdAndDelete(req.body.id)
+    res.send(result)
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+module.exports = { getUserList, addUser, findUser, deleteUser }
