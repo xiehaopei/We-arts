@@ -23,6 +23,7 @@
 import { ref } from 'vue';
 import router from '../router.js';
 import User from '../api/user.js';
+import { ElMessage } from 'element-plus';
 
 export default {
   setup() {
@@ -51,14 +52,35 @@ export default {
       }
     };
     const login = async () => {
+      if(!user.value){
+        return ElMessage({
+          type:'warning',
+          message:'请输入用户名!',
+          duration:2000
+        });
+      }else if(!password.value){
+        return ElMessage({
+          type:'warning',
+          message:'请输入密码!',
+          duration:2000
+        });
+      }
       const { data: res } = await User.getLogin({
         username: user.value,
         password: password.value
       });
       if(res.meta.login==='fail'){
-        console.log('用户名或密码错误!')
+        ElMessage({
+          type:'error',
+          message:'用户名或密码错误! 请重试!',
+          duration:1000
+        });
       }else if(res.meta.login==='success'){
-        console.log('登录成功!')
+        ElMessage({
+          type:'success',
+          message:`Welcome! ${res.data.username} ╭(●｀∀´●)╯`,
+          duration:3000
+        });
         router.push('/index');
       }
     };
