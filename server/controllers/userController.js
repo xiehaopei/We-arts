@@ -30,8 +30,21 @@ const findUser = async (req, res) => {
     password: req.body.password
   }
   try {
-    const result = await User.find(params);
-    res.send(result);
+    const result = await User.findOne(params);
+    if (result) {
+      res.status(200).json({
+        data: {
+          id: result._id,
+          username: result.username,
+          password: result.password
+        },
+        meta: { msg: '登录成功！', status: 200, login:'success' },
+      });
+    } else {
+      res.json({
+        meta: { msg: '用户名或密码错误！', status: 200, login:'fail' }
+      })
+    }
   } catch (error) {
     throw new Error(error);
   }

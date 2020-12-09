@@ -13,7 +13,6 @@
         show-password
         @focus="focus"
         @blur="blur"
-        @keydown="login"
       ></el-input>
       <el-button type="primary" class="login-in" @click="login">Login in</el-button>
     </el-card>
@@ -23,11 +22,12 @@
 <script>
 import { ref } from 'vue';
 import router from '../router.js';
+import User from '../api/user.js';
 
 export default {
   setup() {
-    const user = 'root';
-    const password = 'admin';
+    let user = ref('');
+    let password = ref('');
     const img0 = ref(null);
     const img1 = ref(null);
     const img2 = ref(null);
@@ -50,11 +50,16 @@ export default {
         img2.value.classList.add('hidden');
       }
     };
-    const login = () => {
-      if (user === 'root' && password === 'admin') {
+    const login = async () => {
+      const { data: res } = await User.getLogin({
+        username: user.value,
+        password: password.value
+      });
+      if(res.meta.login==='fail'){
+        console.log('用户名或密码错误!')
+      }else if(res.meta.login==='success'){
+        console.log('登录成功!')
         router.push('/index');
-      } else {
-        console.log('用户名或密码错误!');
       }
     };
     return { user, password, focus, blur, login, img0, img1, img2 };

@@ -22,7 +22,7 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(
   (res) => {
     NProgress.done();
-    res.status === 200 ? Promise.resolve(res) : Promise.reject(res)
+    return res.status === 200 ? Promise.resolve(res) : Promise.reject(res)
   },
   (err) => {
     console.log(err)
