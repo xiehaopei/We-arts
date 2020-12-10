@@ -1,8 +1,36 @@
 <template>
   <el-container>
-    <el-aside width="200px">Aside</el-aside>
+    <el-aside width="200px">
+      <a class="blog-name" href="#">We-arts</a>
+      <el-menu
+      default-active="/monitor"
+      active-text-color="rgb(34, 195, 93)"
+      router>
+      <el-menu-item index="/monitor">
+        <i class="el-icon-menu"></i>
+        <template #title>Dash Board</template>
+      </el-menu-item>
+      <el-submenu index>
+        <template #title>
+          <i class="el-icon-s-promotion"></i>
+          <span>Article Admin</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/article">
+            <span>Article List</span>
+          </el-menu-item>
+          <el-menu-item index="/details">
+            <span>Article Details</span>
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-menu-item index="/user">
+        <i class="el-icon-user"></i>
+        <template #title>User Admin</template>
+      </el-menu-item>
+    </el-menu>
+    </el-aside>
     <el-container>
-      <el-header>Header</el-header>
       <el-main>
         <router-view></router-view>
       </el-main>
@@ -10,29 +38,33 @@
   </el-container>
 </template>
 
-<style lang="scss">
-.el-container {
-  height: 100vh;
-}
+<script lang="ts">
 
-.el-header {
-  background-color: #b3c0d1;
-  color: #333;
-  text-align: center;
-  line-height: 60px;
+</script>
+
+<style lang="scss" scoped>
+.el-container {
+	height: 100vh;
 }
 
 .el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  line-height: 200px;
+	height: 100vh;
+	line-height: 100px;
+	text-align: center;
+
+	.blog-name {
+		height: 100px;
+		line-height: 100px;
+		text-decoration: none;
+		font-weight: 700;
+		font-size: 24px;
+		color: rgba(34, 195, 93,.7);
+	}
 }
 
 .el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
+	line-height: 160px;
+	text-align: center;
+	color: #333;
 }
 </style>

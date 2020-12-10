@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-03 22:12:16
- * @LastEditTime: 2020-12-10 00:00:00
+ * @LastEditTime: 2020-12-10 15:17:01
  * @LastEditors: Haopei Xie
  * @Description: 路由管理
  * @FilePath: \We-arts\admin\src\router.js
@@ -21,6 +21,7 @@ const router = createRouter({
         { path: "/", redirect: '/monitor' },
         { path: '/monitor', component: () => import('./pages/Monitor.vue') },
         { path: '/article', component: () => import('./pages/article/Article.vue') },
+        { path: '/details', component: () => import('./pages/article/Details.vue') },
         { path: '/user', component: () => import('./pages/user/user.vue') }
       ]
     },
