@@ -3,7 +3,7 @@
     <el-aside width="200px">
       <a class="blog-name" href="#">We-arts</a>
       <el-menu
-      default-active="/monitor"
+      :default-active="currentPath"
       active-text-color="rgb(34, 195, 93)"
       router>
       <el-menu-item index="/monitor">
@@ -39,7 +39,13 @@
 </template>
 
 <script lang="ts">
-
+import router from '../router.js'
+export default {
+  setup() {
+    let currentPath = router.currentRoute.value.path;
+    return { currentPath }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -63,7 +69,6 @@
 }
 
 .el-main {
-	line-height: 160px;
 	text-align: center;
 	color: #333;
 }

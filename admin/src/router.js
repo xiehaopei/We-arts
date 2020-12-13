@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-03 22:12:16
- * @LastEditTime: 2020-12-10 15:17:01
+ * @LastEditTime: 2020-12-10 15:50:28
  * @LastEditors: Haopei Xie
  * @Description: 路由管理
  * @FilePath: \We-arts\admin\src\router.js
@@ -32,6 +32,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
+  if(to.path==='/index'){
+    router.replace('/monitor')
+  }
   console.log(to, from)
 })
 
