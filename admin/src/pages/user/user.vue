@@ -33,6 +33,26 @@
         </el-table-column>
       </el-table>
     </el-card>
+
+    <el-dialog title="编辑用户信息" v-model="state.editDialog" width="50%" :before-close="handleClose" center>
+      <span>这是一段信息</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="state.editDialog = false">取 消</el-button>
+          <el-button type="primary" @click="state.editDialog = false">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
+
+    <el-dialog title="添加用户信息" v-model="state.addDialog" width="50%" :before-close="handleClose" center>
+      <span>这是一段信息</span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="state.addDialog = false">取 消</el-button>
+          <el-button type="primary" @click="state.addDialog = false">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -43,31 +63,39 @@ import { ElMessageBox, ElMessage } from 'element-plus';
 export default {
   setup() {
     const state = reactive({
-      userData: []
+      userData: [],
+      editDialog: false,
+      addDialog: false
     });
     onMounted(async () => {
       const { data: res } = await User.getUserList();
       state.userData = res;
     });
-    const updateUser = () => {};
-    const addUser = () => {};
+    const updateUser = () => {
+      state.editDialog = true;
+    };
+    const addUser = () => {
+      state.addDialog = true;
+    };
     const deleteUser = () => {
-      ElMessageBox.confirm('此操作将永久删除该用户, 是否继续?','提示',{
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning',
-          center: true
-      }).then(()=>{
-        ElMessage({
-          type:'success',
-          message:'删除用户成功！'
-        })
-      }).catch(()=>{
-        ElMessage({
-          type:'info',
-          message:'已取消删除'
-        })
+      ElMessageBox.confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
       })
+        .then(() => {
+          ElMessage({
+            type: 'success',
+            message: '删除用户成功！'
+          });
+        })
+        .catch(() => {
+          ElMessage({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
     };
     return { state, updateUser, addUser, deleteUser };
   }

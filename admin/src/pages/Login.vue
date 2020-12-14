@@ -108,7 +108,7 @@ export default {
     .bear {
       position: absolute;
       left: 50%;
-      top: -80px;
+      top: -60px;
       width: 120px;
       height: 95px;
       transform: translate(-50%, 0);
@@ -117,7 +117,7 @@ export default {
     .bear-focus {
       position: absolute;
       left: 50%;
-      top: -80px;
+      top: -60px;
       width: 120px;
       height: 110px;
       transform: translate(-50%, 0);
