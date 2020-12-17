@@ -18,4 +18,8 @@ body {
 .el-card{
 	margin-top: 20px;
 }
+
+.el-input{
+	margin-bottom: 20px;
+}
 </style>

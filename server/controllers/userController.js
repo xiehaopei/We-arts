@@ -38,11 +38,11 @@ const findUser = async (req, res) => {
           username: result.username,
           password: result.password
         },
-        meta: { msg: '登录成功！', status: 200, login:'success' },
+        meta: { msg: '登录成功！', status: 200, login: 'success' },
       });
     } else {
       res.json({
-        meta: { msg: '用户名或密码错误！', status: 200, login:'fail' }
+        meta: { msg: '用户名或密码错误！', status: 200, login: 'fail' }
       })
     }
   } catch (error) {
@@ -67,8 +67,11 @@ const updateUser = async (req, res) => {
     authority: req.body.authority
   }
   try {
-    const result = await User.findByIdAndUpdate(id, params)
-    res.send(result);
+    await User.findByIdAndUpdate(id, params)
+    res.json({
+      data: { id, ...params },
+      meta: { msg: '修改成功！', status: 200 }
+    })
   } catch (error) {
     throw new Error(error)
   }
