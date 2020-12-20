@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-27 23:26:19
- * @LastEditTime: 2020-12-18 21:33:17
+ * @LastEditTime: 2020-12-20 17:04:43
  * @LastEditors: Haopei Xie
  * @Description: Article Model
  * @FilePath: \We-arts\server\models\article.js
@@ -13,7 +13,6 @@ const mongoose = require('mongoose');
  * @description: 文章模块
  * @param _id 文章id
  * @param title 文章标题
- * @param words 文章字数
  * @param content 文章内容
  * @param describe 文章描述
  * @param contentHtml 文章内容源码
