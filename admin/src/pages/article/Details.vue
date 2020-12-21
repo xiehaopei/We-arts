@@ -15,7 +15,7 @@
           <el-input type="textarea" v-model="state.article.describes"></el-input>
         </el-form-item>
         <el-form-item label="标签">
-          <el-checkbox-group v-model="state.article.tags" size="mini" style="text-align:left">
+          <el-checkbox-group v-model="state.article.tags" size="mini">
             <el-checkbox
               v-for="tag in state.tagList"
               :key="tag._id"
@@ -25,10 +25,53 @@
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="内容">
-          <v-md-editor v-model="text" height="400px"></v-md-editor>
+          <v-md-editor v-model="state.article.content" height="400px" class="md"></v-md-editor>
         </el-form-item>
-        <el-form-item label="时间"></el-form-item>
-        <el-form-item label="封面图"></el-form-item>
+        <el-form-item label="时间">
+          <el-date-picker
+            v-model="state.article.time"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="选择日期时间"
+          ></el-date-picker>
+        </el-form-item>
+        <el-form-item label="封面图">
+          <el-upload action="#" list-type="picture-card" :auto-upload="false">
+            <template #default>
+              <i class="el-icon-plus"></i>
+            </template>
+            <template #file="{file}">
+              <div>
+                <img class="el-upload-list__item-thumbnail" :src="file.url" alt />
+                <span class="el-upload-list__item-actions">
+                  <span
+                    class="el-upload-list__item-preview"
+                    @click="handlePictureCardPreview(file)"
+                  >
+                    <i class="el-icon-zoom-in"></i>
+                  </span>
+                  <span
+                    v-if="!disabled"
+                    class="el-upload-list__item-delete"
+                    @click="handleDownload(file)"
+                  >
+                    <i class="el-icon-download"></i>
+                  </span>
+                  <span
+                    v-if="!disabled"
+                    class="el-upload-list__item-delete"
+                    @click="handleRemove(file)"
+                  >
+                    <i class="el-icon-delete"></i>
+                  </span>
+                </span>
+              </div>
+            </template>
+          </el-upload>
+          <el-dialog v-model="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt />
+          </el-dialog>
+        </el-form-item>
       </el-form>
     </el-card>
   </div>
@@ -71,3 +114,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.el-form-item {
+  text-align: left;
+}
+</style>
