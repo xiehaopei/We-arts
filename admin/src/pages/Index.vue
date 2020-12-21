@@ -24,6 +24,10 @@
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
+      <el-menu-item index="/tag">
+        <i class="el-icon-collection-tag"></i>
+        <template #title>Tag admin</template>
+      </el-menu-item>
       <el-menu-item index="/user">
         <i class="el-icon-user"></i>
         <template #title>User Admin</template>

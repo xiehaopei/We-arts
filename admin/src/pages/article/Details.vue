@@ -9,13 +9,13 @@
     <el-card>
       <el-form ref="form" :model="form" label-width="100px">
         <el-form-item label="文章名称">
-          <el-input></el-input>
+          <el-input v-model="state.article.title"></el-input>
         </el-form-item>
         <el-form-item label="文章描述">
-          <el-input type="textarea"></el-input>
+          <el-input type="textarea" v-model="state.article.describes"></el-input>
         </el-form-item>
         <el-form-item label="标签">
-          <el-checkbox-group v-model="state.tagsCheckGroup" size="mini">
+          <el-checkbox-group v-model="state.article.tags" size="mini" style="text-align:left">
             <el-checkbox
               v-for="tag in state.tagList"
               :key="tag._id"
@@ -24,7 +24,9 @@
             >{{tag.tagName}}</el-checkbox>
           </el-checkbox-group>
         </el-form-item>
-        <el-form-item label="内容"></el-form-item>
+        <el-form-item label="内容">
+          <v-md-editor v-model="text" height="400px"></v-md-editor>
+        </el-form-item>
         <el-form-item label="时间"></el-form-item>
         <el-form-item label="封面图"></el-form-item>
       </el-form>
@@ -39,9 +41,21 @@ export default {
   setup() {
     const state = reactive({
       tagList: [],
-      tagsCheckGroup: []
+      article: {
+        id: '',
+        title: '',
+        content: '',
+        describe: '',
+        contentHtml: '',
+        time: null,
+        like: 0,
+        read: 0,
+        image: {},
+        tags: []
+      }
     });
     const form = ref(null);
+    const md = ref();
     const getTags = async () => {
       try {
         const { data: res } = await Tag.getTags();
@@ -53,7 +67,7 @@ export default {
     onMounted(() => {
       getTags();
     });
-    return { state, form };
+    return { state, form, md };
   }
 };
 </script>

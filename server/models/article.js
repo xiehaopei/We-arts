@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-27 23:26:19
- * @LastEditTime: 2020-12-20 17:04:43
+ * @LastEditTime: 2020-12-21 16:46:08
  * @LastEditors: Haopei Xie
  * @Description: Article Model
  * @FilePath: \We-arts\server\models\article.js
