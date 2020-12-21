@@ -17,7 +17,7 @@
         <el-form-item label="标签">
           <el-checkbox-group v-model="state.tagsCheckGroup" size="mini">
             <el-checkbox
-              v-for="tag in state.tags"
+              v-for="tag in state.tagList"
               :key="tag._id"
               :label="tag.tagName"
               border
@@ -38,14 +38,14 @@ import Tag from '../../api/tag.js';
 export default {
   setup() {
     const state = reactive({
-      tags: [],
+      tagList: [],
       tagsCheckGroup: []
     });
     const form = ref(null);
     const getTags = async () => {
       try {
         const { data: res } = await Tag.getTags();
-        state.tags = res.data;
+        state.tagList = res.data;
       } catch (error) {
         throw new Error(error);
       }

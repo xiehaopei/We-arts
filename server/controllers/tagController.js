@@ -17,7 +17,8 @@ const addTag = async (req, res) => {
   try {
     const params = {
       tagName: req.body.tagName,
-      bgColor: req.body.bgColor
+      bgColor: req.body.bgColor,
+      color: req.body.color
     };
     const tag = new Tag(params);
     const result = await tag.save();
@@ -47,7 +48,8 @@ const updateTag = async (req, res) => {
     const id = req.body.id;
     const params = {
       tagName: req.body.tagName,
-      bgColor: req.body.bgColor
+      bgColor: req.body.bgColor,
+      color: req.body.color
     }
     const result = await Tag.findByIdAndUpdate(id, params);
     res.json({
