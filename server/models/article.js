@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-27 23:26:19
- * @LastEditTime: 2020-12-21 16:46:08
+ * @LastEditTime: 2020-12-22 21:05:01
  * @LastEditors: Haopei Xie
  * @Description: Article Model
  * @FilePath: \We-arts\server\models\article.js
@@ -9,6 +9,7 @@
  */
 const mongoose = require('mongoose');
 
+const Schema = mongoose.Schema;
 /**
  * @description: 文章模块
  * @param _id 文章id
@@ -21,15 +22,16 @@ const mongoose = require('mongoose');
  * @param read 阅读数
  * @param image 封面图
  * @param tags 标签
+ * @param isPublic 是否发布
  * @return {*}
  */
-const Schema = new mongoose.Schema({
+const ArticleSchema = Schema({
   title: {
     type: String,
     require: true,
   },
   content: String,
-  describe: String,
+  describe: { type: String, default: '' },
   contentHtml: String,
   time: {
     type: Date,
@@ -54,9 +56,13 @@ const Schema = new mongoose.Schema({
     }
   },
   tags: {
-    type: [Object],
+    type: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
     default: []
   },
+  isPublic: {
+    type: Boolean,
+    default: true
+  }
 });
 
-module.exports = mongoose.model('Article', Schema);
+module.exports = mongoose.model('Article', ArticleSchema);

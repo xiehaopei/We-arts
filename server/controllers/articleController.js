@@ -4,7 +4,7 @@ const getArticleList = async (req, res) => {
   const result = await Article.find((err, res) => {
     if (err) console.log(err)
     else console.log(res)
-  }).sort({ time: -1 })
+  }).populate('tag','tagName').sort({ time: -1 })
   res.send(result)
 }
 
@@ -22,7 +22,6 @@ const createArticle = async (req, res) => {
   try {
     const params = {
       title: req.body.title,
-      words: req.body.words,
       content: req.body.content,
       describe: req.body.describe,
       contentHtml: req.body.contentHtml,
@@ -30,7 +29,8 @@ const createArticle = async (req, res) => {
       like: req.body.like,
       read: req.body.read,
       image: req.body.image,
-      tags: req.body.tags
+      tags: req.body.tags,
+      isPublic: req.body.isPublic
     }
     const article = new Article(params);
     const result = await article.save(function (err) {

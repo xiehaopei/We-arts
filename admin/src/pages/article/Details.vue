@@ -12,20 +12,20 @@
           <el-input v-model="state.article.title"></el-input>
         </el-form-item>
         <el-form-item label="文章描述">
-          <el-input type="textarea" v-model="state.article.describes"></el-input>
+          <el-input type="textarea" v-model="state.article.describe"></el-input>
         </el-form-item>
         <el-form-item label="标签">
           <el-checkbox-group v-model="state.article.tags" size="mini">
             <el-checkbox
               v-for="tag in state.tagList"
               :key="tag._id"
-              :label="tag.tagName"
+              :label="tag._id"
               border
             >{{tag.tagName}}</el-checkbox>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="内容">
-          <v-md-editor v-model="state.article.content" height="400px" class="md"></v-md-editor>
+          <v-md-editor v-model="state.article.content" height="400px" ref="md"></v-md-editor>
         </el-form-item>
         <el-form-item label="时间">
           <el-date-picker
@@ -72,6 +72,7 @@
             <img width="100%" :src="dialogImageUrl" alt />
           </el-dialog>
         </el-form-item>
+        <el-button type="success" @click="publicArticle">发布文章</el-button>
       </el-form>
     </el-card>
   </div>
@@ -80,6 +81,8 @@
 <script>
 import { onMounted, reactive, ref } from 'vue';
 import Tag from '../../api/tag.js';
+import marked from 'marked';
+import { ElMessage } from 'element-plus';
 export default {
   setup() {
     const state = reactive({
@@ -94,7 +97,8 @@ export default {
         like: 0,
         read: 0,
         image: {},
-        tags: []
+        tags: [],
+        isPublic: true
       }
     });
     const form = ref(null);
@@ -110,7 +114,17 @@ export default {
     onMounted(() => {
       getTags();
     });
-    return { state, form, md };
+    const publicArticle = () => {
+      if(!state.article.title){
+        return ElMessage({
+          type:'info',
+          message:'请输入文章名称！'
+        })
+      }
+      state.article.contentHtml = marked(state.article.content);
+      console.log(state.article);
+    };
+    return { state, form, md, publicArticle };
   }
 };
 </script>

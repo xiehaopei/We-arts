@@ -1,5 +1,4 @@
 const Tag = require('../models/tag');
-const { param } = require('../routes/tag');
 
 const getTags = async (req, res) => {
   try {
