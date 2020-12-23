@@ -56,10 +56,10 @@ export default {
     onMounted(() => getArticleList());
     const getArticleList = async () => {
       const { data: res } = await Article.getArticleList();
-      res.forEach(element => {
+      res.data.forEach(element => {
         element.time = getTime(element.time);
       });
-      state.articleList = res;
+      state.articleList = res.data;
       console.log(res);
     };
     return { state, getArticleList };

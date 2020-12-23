@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-18 16:37:55
- * @LastEditTime: 2020-12-18 20:29:05
+ * @LastEditTime: 2020-12-23 17:05:46
  * @LastEditors: Haopei Xie
  * @Description: Article API
  * @FilePath: \We-arts\admin\src\api\article.js
@@ -26,8 +26,8 @@ const deleteArticleById = (id) => {
   return axios.get(base.baseUrl + base.deleteArticleById + id)
 }
 
-const getArticleListByTag = (tags) => {
-  return axios.get(base.baseUrl + base.getArticleListByTag + tags)
+const getArticleListByTag = (id) => {
+  return axios.get(base.baseUrl + base.getArticleListByTag + id)
 }
 
 export default { getArticleList, getArticleById, createArticle, deleteArticleById, getArticleListByTag }

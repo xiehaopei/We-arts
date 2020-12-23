@@ -4,15 +4,21 @@ const getArticleList = async (req, res) => {
   const result = await Article.find((err, res) => {
     if (err) console.log(err)
     else console.log(res)
-  }).populate('tag','tagName').sort({ time: -1 })
-  res.send(result)
+  }).populate('tag', 'tagName').sort({ time: -1 })
+  res.json({
+    data: result,
+    meta: { msg: '获取成功！', status: 200 }
+  })
 }
 
 const getArticleById = async (req, res) => {
   try {
     const result = await Article.findById(req.params.id);
     result.time = getTime(result.time);
-    res.send(result);
+    res.json({
+      data: result,
+      meta: { msg: '获取成功！', status: 200 }
+    })
   } catch (error) {
     throw error
   }
@@ -40,7 +46,10 @@ const createArticle = async (req, res) => {
         console.log('Save success');
       }
     });
-    res.send(result);
+    res.json({
+      data: result,
+      meta: { msg: '获取成功！', status: 200 }
+    })
   } catch (error) {
     throw error;
   }
@@ -49,7 +58,10 @@ const createArticle = async (req, res) => {
 const deleteArticleById = async (req, res) => {
   try {
     const result = await Article.findByIdAndDelete(req.params.id);
-    res.send(result);
+    res.json({
+      data: result,
+      meta: { msg: '获取成功！', status: 200 }
+    })
   } catch (error) {
     throw error;
   }
@@ -57,8 +69,11 @@ const deleteArticleById = async (req, res) => {
 
 const getArticleListByTag = async (req, res) => {
   try {
-    const result = await Article.find({ tags: req.params.tag })
-    res.send(result)
+    const result = await Article.find({ tags: { _id: req.params.id } })
+    res.json({
+      data: result,
+      meta: { msg: '获取成功！', status: 200 }
+    })
   } catch (error) {
     throw error
   }

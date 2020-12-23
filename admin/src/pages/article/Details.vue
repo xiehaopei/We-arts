@@ -7,7 +7,7 @@
     </el-breadcrumb>
 
     <el-card>
-      <el-form ref="form" :model="form" label-width="100px">
+      <el-form ref="form" label-width="100px">
         <el-form-item label="文章名称">
           <el-input v-model="state.article.title"></el-input>
         </el-form-item>
@@ -107,6 +107,7 @@ export default {
       try {
         const { data: res } = await Tag.getTags();
         state.tagList = res.data;
+        console.log(state.tagList);
       } catch (error) {
         throw new Error(error);
       }
@@ -115,11 +116,11 @@ export default {
       getTags();
     });
     const publicArticle = () => {
-      if(!state.article.title){
+      if (!state.article.title) {
         return ElMessage({
-          type:'info',
-          message:'请输入文章名称！'
-        })
+          type: 'info',
+          message: '请输入文章名称！'
+        });
       }
       state.article.contentHtml = marked(state.article.content);
       console.log(state.article);
