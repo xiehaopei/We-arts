@@ -13,6 +13,7 @@
         show-password
         @focus="focus"
         @blur="blur"
+        @keydown.enter.prevent="login"
       ></el-input>
       <el-button type="primary" class="login-in" @click="login">Login in</el-button>
     </el-card>
