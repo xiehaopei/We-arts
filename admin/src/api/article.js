@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-18 16:37:55
- * @LastEditTime: 2020-12-23 17:05:46
+ * @LastEditTime: 2020-12-24 20:18:29
  * @LastEditors: Haopei Xie
  * @Description: Article API
  * @FilePath: \We-arts\admin\src\api\article.js
@@ -10,8 +10,8 @@
 import axios from '../utils/http.js';
 import base from './base.js';
 
-const getArticleList = () => {
-  return axios.get(base.baseUrl + base.getArticleList)
+const getArticleList = (queryInfo) => {
+  return axios.get(base.baseUrl + base.getArticleList, { params: queryInfo })
 }
 
 const getArticleById = (id) => {

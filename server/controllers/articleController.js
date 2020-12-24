@@ -1,14 +1,21 @@
 const Article = require('../models/article.js');
 
 const getArticleList = async (req, res) => {
-  const result = await Article.find((err, res) => {
-    if (err) console.log(err)
-    else console.log(res)
-  }).populate('tags').sort({ time: -1 })
-  res.json({
-    data: result,
-    meta: { msg: '获取成功！', status: 200 }
-  })
+  try {
+    const params = {
+      pageSize: req.query ? parseInt(req.query.pageSize) : null,
+      pageNum: req.query ? parseInt(req.query.pageNum) : null
+    }
+    const count = await Article.countDocuments();
+    const result = await Article.find().populate('tags').sort({ time: -1 }).skip((params.pageNum - 1) * params.pageSize).limit(params.pageSize)
+    res.json({
+      total: count,
+      data: result,
+      meta: { msg: '获取成功！', status: 200 }
+    })
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
 const getArticleById = async (req, res) => {

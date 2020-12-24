@@ -46,6 +46,16 @@
           </template>
         </el-table-column>
       </el-table>
+
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="state.queryInfo.pageNum"
+        :page-sizes="[5, 10, 20, 50]"
+        :page-size="state.queryInfo.pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="state.total"
+      ></el-pagination>
     </el-card>
   </div>
 </template>
@@ -57,18 +67,33 @@ import getTime from '../../utils/time.js';
 export default {
   setup() {
     const state = reactive({
-      articleList: []
+      articleList: [],
+      queryInfo: {
+        query: '',
+        pageNum: 1,
+        pageSize: 5
+      },
+      total:0
     });
     onMounted(() => getArticleList());
     const getArticleList = async () => {
-      const { data: res } = await Article.getArticleList();
+      const { data: res } = await Article.getArticleList(state.queryInfo);
       res.data.forEach((element) => {
         element.time = getTime(element.time);
       });
+      state.total = res.total;
       state.articleList = res.data;
       console.log(res);
     };
-    return { state, getArticleList };
+    const handleSizeChange = (size)=>{
+      state.queryInfo.pageSize = size
+      getArticleList();
+    };
+    const handleCurrentChange = (page)=>{
+      state.queryInfo.pageNum = page
+      getArticleList();
+    };
+    return { state, getArticleList, handleSizeChange, handleCurrentChange };
   }
 };
 </script>
