@@ -4,7 +4,7 @@ const getArticleList = async (req, res) => {
   const result = await Article.find((err, res) => {
     if (err) console.log(err)
     else console.log(res)
-  }).populate('tag', 'tagName').sort({ time: -1 })
+  }).populate('tags').sort({ time: -1 })
   res.json({
     data: result,
     meta: { msg: '获取成功！', status: 200 }
@@ -69,7 +69,7 @@ const deleteArticleById = async (req, res) => {
 
 const getArticleListByTag = async (req, res) => {
   try {
-    const result = await Article.find({ tags: { _id: req.params.id } })
+    const result = await Article.find({ tags: { _id: req.params.id } }).populate('tags').sort({ time: -1 })
     res.json({
       data: result,
       meta: { msg: '获取成功！', status: 200 }

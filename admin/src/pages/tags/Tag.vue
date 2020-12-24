@@ -21,11 +21,28 @@
 
         <div v-if="state.isShow" class="article-list">
           <el-table :data="state.articleList">
-            <el-table-column type="index" width="50"></el-table-column>
-            <el-table-column prop="title" label="文章名" width="200"></el-table-column>
-            <el-table-column prop="like" label="点赞数" width="75"></el-table-column>
-            <el-table-column prop="read" label="阅读量" width="75"></el-table-column>
-            <el-table-column label="时间" width="200">
+            <el-table-column type="index" width="50" align="center"></el-table-column>
+            <el-table-column prop="title" label="文章名" width="200" align="center"></el-table-column>
+            <el-table-column label="标签" min-width="200" align="center">
+              <template v-slot="scope">
+                <div v-if="scope.row.tags">
+                  <el-tag
+                    v-for="tag in scope.row.tags"
+                    :key="tag._id"
+                    :style="{'background-color':tag.bgColor,'color':tag.color}"
+                  >{{tag.tagName}}</el-tag>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="like" label="点赞数" width="75" align="center"></el-table-column>
+            <el-table-column prop="read" label="阅读量" width="75" align="center"></el-table-column>
+            <el-table-column label="发布状态" width="120" align="center">
+              <template v-slot="scope">
+                <el-tag v-if="scope.row.isPublic" type="primary">已发布</el-tag>
+                <el-tag v-else type="warning">未发布</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column label="时间" width="200" align="center">
               <template v-slot="scope">
                 <i class="el-icon-time"></i>
                 <span style="margin-left: 10px">{{ scope.row.time }}</span>
@@ -102,16 +119,26 @@ export default {
     const addOption = () => {
       state.addTagDialogVisible = false;
     };
+    // 此处需要进行节流优化
     const showArticleList = async (id) => {
       try {
         const { data: res } = await Article.getArticleListByTag(id);
-        res.data.forEach(element => {
-          element.time = getTime(element.time)
+        res.data.forEach((element) => {
+          element.time = getTime(element.time);
         });
         state.articleList = res.data;
         state.isShow = true;
         console.log(state.articleList);
+        ElMessage({
+          type:'success',
+          message:'获取文章列表成功！',
+          duration:700
+        })
       } catch (error) {
+        ElMessage({
+          type:'error',
+          message:'发生错误x_x'
+        })
         throw new Error(error);
       }
     };
@@ -133,7 +160,7 @@ export default {
     margin-left: 20px;
   }
 
-  .article-list{
+  .article-list {
     margin-top: 30px;
     text-align: center;
   }
