@@ -68,8 +68,8 @@
               </div>
             </template>
           </el-upload>
-          <el-dialog v-model="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt />
+          <el-dialog v-model="state.coverDialogVisible">
+            <img width="100%" :src="state.dialogImageUrl" alt />
           </el-dialog>
         </el-form-item>
         <el-button type="success" @click="publicArticle">发布文章</el-button>
@@ -81,14 +81,15 @@
 <script>
 import { onMounted, reactive, ref } from 'vue';
 import Tag from '../../api/tag.js';
+import Article from '../../api/article.js';
 import marked from 'marked';
 import { ElMessage } from 'element-plus';
 export default {
   setup() {
     const state = reactive({
       tagList: [],
+      id: '',
       article: {
-        id: '',
         title: '',
         content: '',
         describe: '',
@@ -99,7 +100,9 @@ export default {
         image: {},
         tags: [],
         isPublic: true
-      }
+      },
+      coverDialogVisible: false,
+      dialogImageUrl: ''
     });
     const form = ref(null);
     const md = ref();
@@ -124,6 +127,25 @@ export default {
       }
       state.article.contentHtml = marked(state.article.content);
       console.log(state.article);
+      // 后台无法获取到tags
+      createArticle(state.article);
+    };
+    const createArticle = async (parmas) => {
+      try {
+        const { data: res } = await Article.createArticle(parmas);
+        if (res.status === 200) {
+          ElMessage({
+            type: 'success',
+            message: '文章发布成功!'
+          });
+        }
+      } catch (error) {
+        ElMessage({
+          type: error,
+          message: '发生了错误x_x'
+        });
+        throw new Error(error);
+      }
     };
     return { state, form, md, publicArticle };
   }

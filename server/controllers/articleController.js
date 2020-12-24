@@ -39,7 +39,7 @@ const createArticle = async (req, res) => {
       isPublic: req.body.isPublic
     }
     const article = new Article(params);
-    const result = await article.save(function (err) {
+    await article.save(function (err) {
       if (err) {
         console.log(err)
       } else {
@@ -47,8 +47,7 @@ const createArticle = async (req, res) => {
       }
     });
     res.json({
-      data: result,
-      meta: { msg: '获取成功！', status: 200 }
+      meta: { msg: '添加成功！', status: 200 }
     })
   } catch (error) {
     throw error;

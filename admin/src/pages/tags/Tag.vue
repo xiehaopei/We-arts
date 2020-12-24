@@ -48,11 +48,20 @@
                 <span style="margin-left: 10px">{{ scope.row.time }}</span>
               </template>
             </el-table-column>
+            <el-table-column label="操作" width="120" align="center">
+              <template v-slot="option">
+                <el-button type="success" size="mini" @click="viewArticle(option.row)">
+                  <i class="el-icon-view"></i>
+                  <span>Check</span>
+                </el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </div>
     </el-card>
 
+    <!-- el-color-picker 存在bug -->
     <el-dialog title="添加新标签" v-model="state.addTagDialogVisible" width="50%" center>
       <el-form label-width="100px">
         <el-form-item label="标签名">
@@ -123,22 +132,32 @@ export default {
     const showArticleList = async (id) => {
       try {
         const { data: res } = await Article.getArticleListByTag(id);
-        res.data.forEach((element) => {
-          element.time = getTime(element.time);
-        });
-        state.articleList = res.data;
-        state.isShow = true;
-        console.log(state.articleList);
-        ElMessage({
-          type:'success',
-          message:'获取文章列表成功！',
-          duration:700
-        })
+        if (res.data.length) {
+          res.data.forEach((element) => {
+            element.time = getTime(element.time);
+          });
+          state.articleList = res.data;
+          state.isShow = true;
+          console.log(state.articleList);
+          ElMessage({
+            type: 'success',
+            message: '获取文章列表成功！',
+            duration: 700
+          });
+        } else {
+          state.isShow = false;
+          state.articleList = {};
+          ElMessage({
+            type: 'info',
+            message: '该标签下没有文章',
+            duration: 700
+          });
+        }
       } catch (error) {
         ElMessage({
-          type:'error',
-          message:'发生错误x_x'
-        })
+          type: 'error',
+          message: '发生错误x_x'
+        });
         throw new Error(error);
       }
     };
@@ -152,7 +171,7 @@ export default {
   text-align: left;
 
   .el-tag {
-    margin-left: 15px;
+    margin: 5px auto;
     cursor: pointer;
   }
 
@@ -164,5 +183,9 @@ export default {
     margin-top: 30px;
     text-align: center;
   }
+}
+
+.el-tag ~ .el-tag {
+  margin-left: 15px;
 }
 </style>
