@@ -107,6 +107,10 @@ export default {
   margin: 5px auto;
 }
 
+.el-pagination{
+  margin-top: 15px;
+}
+
 .el-tag ~ .el-tag {
   margin-left: 15px;
 }
