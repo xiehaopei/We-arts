@@ -1,4 +1,6 @@
 const Article = require('../models/article.js');
+const fs = require('fs');
+const path = require('path');
 
 const getArticleList = async (req, res) => {
   try {
@@ -85,4 +87,19 @@ const getArticleListByTag = async (req, res) => {
   }
 }
 
-module.exports = { getArticleList, getArticleById, createArticle, deleteArticleById, getArticleListByTag }
+const fileUpload = (req, res) => {
+  const extname = path.extname(req.file.originalname);
+  const newPath = req.file.path + extname;
+  fs.rename(req.file.path, newPath, function (err) {
+    if (err) {
+      res.json({ meta: { msg: '上传失败' } })
+    } else {
+      res.json({
+        data: req.file,
+        meta: { msg: '上传成功' }
+      })
+    }
+  })
+}
+
+module.exports = { getArticleList, getArticleById, createArticle, deleteArticleById, getArticleListByTag, fileUpload }

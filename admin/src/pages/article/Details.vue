@@ -36,41 +36,17 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="封面图">
-          <el-upload action="#" list-type="picture-card" :auto-upload="false">
-            <template #default>
-              <i class="el-icon-plus"></i>
-            </template>
-            <template #file="{file}">
-              <div>
-                <img class="el-upload-list__item-thumbnail" :src="file.url" alt />
-                <span class="el-upload-list__item-actions">
-                  <span
-                    class="el-upload-list__item-preview"
-                    @click="handlePictureCardPreview(file)"
-                  >
-                    <i class="el-icon-zoom-in"></i>
-                  </span>
-                  <span
-                    v-if="!disabled"
-                    class="el-upload-list__item-delete"
-                    @click="handleDownload(file)"
-                  >
-                    <i class="el-icon-download"></i>
-                  </span>
-                  <span
-                    v-if="!disabled"
-                    class="el-upload-list__item-delete"
-                    @click="handleRemove(file)"
-                  >
-                    <i class="el-icon-delete"></i>
-                  </span>
-                </span>
-              </div>
-            </template>
+          <el-upload
+            ref="upload"
+            :action="state.uploadUrl"
+            :limit="1"
+            :on-remove="handleRemove"
+            :on-exceed="handleExceed"
+            :on-success="handleSuccess"
+            :auto-upload="false"
+          >
+            <el-button size="small" type="primary">选取文件</el-button>
           </el-upload>
-          <el-dialog v-model="state.coverDialogVisible">
-            <img width="100%" :src="state.dialogImageUrl" alt />
-          </el-dialog>
         </el-form-item>
         <el-button type="success" @click="publicArticle">发布文章</el-button>
       </el-form>
@@ -81,9 +57,10 @@
 <script>
 import { onMounted, reactive, ref } from 'vue';
 import Tag from '../../api/tag.js';
-import Article from '../../api/article.js';
+/* import Article from '../../api/article.js'; */
 import marked from 'marked';
 import { ElMessage } from 'element-plus';
+import base from '../../api/base.js';
 export default {
   setup() {
     const state = reactive({
@@ -101,16 +78,15 @@ export default {
         tags: [],
         isPublic: true
       },
-      coverDialogVisible: false,
-      dialogImageUrl: ''
+      uploadUrl: base.baseUrl + base.fileUpload
     });
     const form = ref(null);
     const md = ref();
+    const upload = ref();
     const getTags = async () => {
       try {
         const { data: res } = await Tag.getTags();
         state.tagList = res.data;
-        console.log(state.tagList);
       } catch (error) {
         throw new Error(error);
       }
@@ -118,7 +94,7 @@ export default {
     onMounted(() => {
       getTags();
     });
-    const publicArticle = () => {
+    const publicArticle = async () => {
       if (!state.article.title) {
         return ElMessage({
           type: 'info',
@@ -126,11 +102,20 @@ export default {
         });
       }
       state.article.contentHtml = marked(state.article.content);
-      console.log(state.article);
+      try {
+        await upload.value.submit();
+        console.log(state.article);
+      } catch (error) {
+        ElMessage({
+          type: 'error',
+          message: '图片上传失败x_x'
+        });
+        throw new Error(error);
+      }
       // 后台无法获取到tags
-      createArticle(state.article);
+      /* createArticle(state.article); */
     };
-    const createArticle = async (parmas) => {
+    /* const createArticle = async (parmas) => {
       try {
         const { data: res } = await Article.createArticle(parmas);
         if (res.status === 200) {
@@ -146,8 +131,34 @@ export default {
         });
         throw new Error(error);
       }
+    }; */
+    const handleRemove = (file, fileList) => {
+      console.log('remove', file, fileList);
     };
-    return { state, form, md, publicArticle };
+    const handleExceed = (files, fileList) => {
+      console.log(files, fileList);
+      ElMessage({
+        type: 'warning',
+        message: '最多只能上传一个文件哦~'
+      });
+    };
+    const handleSuccess = (response) => {
+      console.log(response);
+      if (response.data) {
+        state.article.image.path = response.data.path;
+        state.article.image.filename = response.data.filename;
+      }
+    };
+    return {
+      state,
+      form,
+      md,
+      upload,
+      publicArticle,
+      handleRemove,
+      handleExceed,
+      handleSuccess
+    };
   }
 };
 </script>

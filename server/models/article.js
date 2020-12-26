@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-27 23:26:19
- * @LastEditTime: 2020-12-22 21:05:01
+ * @LastEditTime: 2020-12-26 22:30:21
  * @LastEditors: Haopei Xie
  * @Description: Article Model
  * @FilePath: \We-arts\server\models\article.js
@@ -46,11 +46,11 @@ const ArticleSchema = Schema({
     default: 0
   },
   image: {
-    url: {
+    path: {
       type: String,
       default: ''
     },
-    name: {
+    filename: {
       type: String,
       default: ''
     }
