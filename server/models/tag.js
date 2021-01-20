@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-30 20:54:10
- * @LastEditTime: 2020-12-22 20:49:51
+ * @LastEditTime: 2021-01-20 23:39:03
  * @LastEditors: Haopei Xie
  * @Description: Tag Model
  * @FilePath: \We-arts\server\models\tag.js
@@ -16,9 +16,7 @@ const Schema = mongoose.Schema;
  * @return {*}
  */
 const TagSchema = Schema({
-  tagName: { type: String, unique: true },
-  bgColor: { type: String, default: '#fff' },
-  color: { type: String, default: '#000' },
+  tagName: { type: String, unique: true }
 })
 
 module.exports = mongoose.model('Tag', TagSchema);

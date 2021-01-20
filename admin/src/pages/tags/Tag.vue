@@ -8,12 +8,9 @@
     <el-card>
       <div class="card-box">
         <span>选择标签：</span>
-        <el-tag
-          v-for="tag in state.tags"
-          :key="tag._id"
-          :style="{'background-color':tag.bgColor,'color':tag.color}"
-          @click="showArticleList(tag._id)"
-        >{{tag.tagName}}</el-tag>
+        <el-tag class="tag" v-for="tag in state.tags" :key="tag._id" @click="showArticleList(tag._id)">
+          {{tag.tagName}}
+        </el-tag>
         <el-button type="success" size="mini" @click="showAddDialog">
           <i class="el-icon-plus"></i>
           <span>Add Tag</span>
@@ -26,11 +23,7 @@
             <el-table-column label="标签" min-width="200" align="center">
               <template v-slot="scope">
                 <div v-if="scope.row.tags">
-                  <el-tag
-                    v-for="tag in scope.row.tags"
-                    :key="tag._id"
-                    :style="{'background-color':tag.bgColor,'color':tag.color}"
-                  >{{tag.tagName}}</el-tag>
+                  <el-tag class="tag" v-for="tag in scope.row.tags" :key="tag._id">{{tag.tagName}}</el-tag>
                 </div>
               </template>
             </el-table-column>
@@ -61,24 +54,14 @@
       </div>
     </el-card>
 
-    <!-- el-color-picker 存在bug -->
     <el-dialog title="添加新标签" v-model="state.addTagDialogVisible" width="50%" center>
       <el-form label-width="100px">
         <el-form-item label="标签名">
           <el-input placeholder="请输入标签名" v-model="state.tag.tagName"></el-input>
         </el-form-item>
-        <el-form-item label="标签背景色">
-          <el-color-picker v-model="state.tag.bgColor" show-alpha></el-color-picker>
-        </el-form-item>
-        <el-form-item label="标签字体颜色">
-          <el-color-picker v-model="state.tag.color" show-alpha></el-color-picker>
-        </el-form-item>
         <el-form-item label="标签预览">
-          <el-tag
-            :style="{'background-color':state.tag.bgColor,'color':state.tag.color}"
-          >{{state.tag.tagName}}</el-tag>
+          <el-tag class="tag">{{state.tag.tagName}}</el-tag>
         </el-form-item>
-        {{state.tag}}
       </el-form>
       <template #footer>
         <span class="dialog-footer">
@@ -187,5 +170,23 @@ export default {
 
 .el-tag ~ .el-tag {
   margin-left: 15px;
+}
+
+.tag {
+  display: inline-block;
+  margin: 4px 8px 10px;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  box-shadow: 2px 2px 5px #d4d4d4;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: 13px;
+  color: #000;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: #3eaf7c;
+    color: #fff;
+  }
 }
 </style>
