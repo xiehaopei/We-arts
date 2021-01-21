@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-08 15:58:07
- * @LastEditTime: 2020-12-26 01:19:18
+ * @LastEditTime: 2021-01-21 23:54:21
  * @LastEditors: Haopei Xie
  * @Description: API URL
  * @FilePath: \We-arts\admin\src\api\base.js
@@ -26,7 +26,7 @@ const base = {
   /* Tag API */
   getTags: '/tag/getTags',
   addTag: '/tag/addTag',
-  deleteTagById: '/tag/deleteTagById/',
+  deleteTag: '/tag/deleteTag',
   updateTag: '/tag/updateTag'
 }
 

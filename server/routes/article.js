@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-26 16:26:26
- * @LastEditTime: 2020-12-26 16:47:53
+ * @LastEditTime: 2021-01-21 22:28:39
  * @LastEditors: Haopei Xie
  * @Description: 文章模块路由
  * @FilePath: \We-arts\server\routes\article.js
@@ -19,6 +19,6 @@ router.get('/getArticle/:id', controller.getArticleById);
 router.post('/createArticle', controller.createArticle);
 router.get('/deleteArticle/:id', controller.deleteArticleById);
 router.get('/getArticleListByTag/:id', controller.getArticleListByTag);
-router.post('/fileUpload', upload.single('file'), controller.fileUpload)
+router.post('/fileUpload', upload.single('file'), controller.fileUpload);
 
 module.exports = router;

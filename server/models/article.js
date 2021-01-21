@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-11-27 23:26:19
- * @LastEditTime: 2020-12-26 22:30:21
+ * @LastEditTime: 2021-01-21 21:40:47
  * @LastEditors: Haopei Xie
  * @Description: Article Model
  * @FilePath: \We-arts\server\models\article.js
@@ -18,7 +18,6 @@ const Schema = mongoose.Schema;
  * @param describe 文章描述
  * @param contentHtml 文章内容源码
  * @param time 时间
- * @param like 点赞数
  * @param read 阅读数
  * @param image 封面图
  * @param tags 标签
@@ -36,10 +35,6 @@ const ArticleSchema = Schema({
   time: {
     type: Date,
     default: Date.now
-  },
-  like: {
-    type: Number,
-    default: 0
   },
   read: {
     type: Number,

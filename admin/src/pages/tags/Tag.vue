@@ -8,18 +8,25 @@
     <el-card>
       <div class="card-box">
         <span>选择标签：</span>
-        <el-tag class="tag" v-for="tag in state.tags" :key="tag._id" @click="showArticleList(tag._id)">
-          {{tag.tagName}}
-        </el-tag>
-        <el-button type="success" size="mini" @click="showAddDialog">
+        <el-tag
+          class="tag"
+          v-for="tag in state.tags"
+          :key="tag._id"
+          @click="showArticleList(tag._id)"
+        >{{tag.tagName}}</el-tag>
+        <el-button type="success" size="mini" @click="state.addTagDialogVisible = true">
           <i class="el-icon-plus"></i>
           <span>Add Tag</span>
+        </el-button>
+        <el-button type="danger" size="mini" @click="state.delTagDialogVisible = true">
+          <i class="el-icon-delete"></i>
+          <span>Delete Tag</span>
         </el-button>
 
         <div v-if="state.isShow" class="article-list">
           <el-table :data="state.articleList">
             <el-table-column type="index" width="50" align="center"></el-table-column>
-            <el-table-column prop="title" label="文章名" width="200" align="center"></el-table-column>
+            <el-table-column prop="title" label="文章名" min-width="200" align="center"></el-table-column>
             <el-table-column label="标签" min-width="200" align="center">
               <template v-slot="scope">
                 <div v-if="scope.row.tags">
@@ -27,7 +34,6 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="like" label="点赞数" width="75" align="center"></el-table-column>
             <el-table-column prop="read" label="阅读量" width="75" align="center"></el-table-column>
             <el-table-column label="发布状态" width="120" align="center">
               <template v-slot="scope">
@@ -39,14 +45,6 @@
               <template v-slot="scope">
                 <i class="el-icon-time"></i>
                 <span style="margin-left: 10px">{{ scope.row.time }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" width="120" align="center">
-              <template v-slot="option">
-                <el-button type="success" size="mini" @click="viewArticle(option.row)">
-                  <i class="el-icon-view"></i>
-                  <span>Check</span>
-                </el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -70,11 +68,22 @@
         </span>
       </template>
     </el-dialog>
+
+    <el-dialog title="删除标签" v-model="state.delTagDialogVisible" width="50%" center>
+      <span>请输入要删除的标签名称，并确保该标签下不包含任何文章</span>
+      <el-input v-model="delInput" placeholder="请输入标签名" clearable></el-input>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="cancelOption">取 消</el-button>
+          <el-button type="primary" @click="delTag">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 import Tag from '../../api/tag.js';
 import Article from '../../api/article.js';
 import { ElMessage } from 'element-plus';
@@ -84,32 +93,101 @@ export default {
     const state = reactive({
       tags: [],
       tag: {
-        tagName: '',
-        bgColor: '#000',
-        color: '#fff'
+        tagName: ''
       },
       addTagDialogVisible: false,
+      delTagDialogVisible: false,
       isShow: false,
       articleList: {}
     });
+    const delInput = ref('');
     const getTags = async () => {
       const { data: res } = await Tag.getTags();
       state.tags = res.data;
       console.log(state.tags);
     };
     onMounted(() => getTags());
-    const showAddDialog = () => {
-      state.addTagDialogVisible = true;
-    };
     const cancelOption = () => {
       ElMessage({
         type: 'info',
         message: '已取消操作'
       });
+      delInput.value = '';
       state.addTagDialogVisible = false;
+      state.delTagDialogVisible = false;
     };
-    const addOption = () => {
-      state.addTagDialogVisible = false;
+    const addOption = async () => {
+      if (!state.tag.tagName) {
+        return ElMessage({
+          type: 'info',
+          message: '请输入标签名称!'
+        });
+      }
+      try {
+        const { data: res } = await Tag.addTag({ tagName: state.tag.tagName });
+        if (res.meta.status === 200) {
+          ElMessage({
+            type: 'success',
+            message: '添加标签成功！'
+          });
+          state.addTagDialogVisible = false;
+          await getTags();
+        }
+      } catch (error) {
+        ElMessage({
+          type: 'error',
+          message: '添加失败x_x'
+        });
+        throw new Error(error);
+      }
+    };
+    const delTag = async () => {
+      if (!delInput.value) {
+        return ElMessage({
+          type: 'info',
+          message: '请输入标签名'
+        });
+      }
+      const found = state.tags.find((item) => {
+        return item.tagName == delInput.value;
+      });
+      if (found) {
+        try {
+          const { data: res } = await Article.getArticleListByTag(found._id);
+          if (res.data.length) {
+            return ElMessage({
+              type: 'warning',
+              message: `该标签下含有${res.data.length}篇文章，无法直接删除该标签！`
+            });
+          } else {
+            try {
+              const { data: res } = await Tag.deleteTag({tagName:delInput.value});
+              if (res.meta.status === 200) {
+                ElMessage({
+                  type: 'success',
+                  message: '标签删除成功!'
+                });
+                await getTags();
+              }
+            } catch (error) {
+              ElMessage({
+                type: 'error',
+                message: '删除失败X_X'
+              });
+              throw new Error(error);
+            }
+          }
+        } catch (error) {
+          throw new Error(error);
+        }
+      } else {
+        return ElMessage({
+          type: 'warning',
+          message: '标签名不存在x_x'
+        });
+      }
+      delInput.value = '';
+      state.delTagDialogVisible = false;
     };
     // 此处需要进行节流优化
     const showArticleList = async (id) => {
@@ -144,7 +222,14 @@ export default {
         throw new Error(error);
       }
     };
-    return { state, showAddDialog, cancelOption, addOption, showArticleList };
+    return {
+      state,
+      delInput,
+      cancelOption,
+      addOption,
+      showArticleList,
+      delTag
+    };
   }
 };
 </script>
@@ -159,7 +244,7 @@ export default {
   }
 
   .el-button {
-    margin-left: 20px;
+    margin: 20px 0 0 20px;
   }
 
   .article-list {
@@ -188,5 +273,9 @@ export default {
     background-color: #3eaf7c;
     color: #fff;
   }
+}
+
+.el-input {
+  margin: 10px 5px;
 }
 </style>

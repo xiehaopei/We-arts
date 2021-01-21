@@ -41,7 +41,6 @@ const createArticle = async (req, res) => {
       describe: req.body.describe,
       contentHtml: req.body.contentHtml,
       time: req.body.time,
-      like: req.body.like,
       read: req.body.read,
       image: req.body.image,
       tags: req.body.tags,

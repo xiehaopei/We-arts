@@ -16,8 +16,6 @@ const addTag = async (req, res) => {
   try {
     const params = {
       tagName: req.body.tagName,
-      bgColor: req.body.bgColor,
-      color: req.body.color
     };
     const tag = new Tag(params);
     const result = await tag.save();
@@ -30,11 +28,10 @@ const addTag = async (req, res) => {
   }
 };
 
-const deleteTagById = async (req, res) => {
+const deleteTag = async (req, res) => {
   try {
-    const result = await Tag.findByIdAndDelete(req.params.id);
+    await Tag.findOneAndRemove({ tagName: req.body.tagName })
     res.json({
-      data: result,
       meta: { msg: '删除成功！', status: 200 }
     })
   } catch (error) {
@@ -47,8 +44,6 @@ const updateTag = async (req, res) => {
     const id = req.body.id;
     const params = {
       tagName: req.body.tagName,
-      bgColor: req.body.bgColor,
-      color: req.body.color
     }
     const result = await Tag.findByIdAndUpdate(id, params);
     res.json({
@@ -60,4 +55,4 @@ const updateTag = async (req, res) => {
   }
 };
 
-module.exports = { getTags, addTag, deleteTagById, updateTag };
+module.exports = { getTags, addTag, deleteTag, updateTag };

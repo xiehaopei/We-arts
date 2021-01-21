@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-20 20:24:08
- * @LastEditTime: 2020-12-20 21:15:16
+ * @LastEditTime: 2021-01-22 01:05:31
  * @LastEditors: Haopei Xie
  * @Description: 标签路由模块
  * @FilePath: \We-arts\server\routes\tag.js
@@ -13,7 +13,7 @@ const controller = require('../controllers/tagController');
 
 router.get('/getTags', controller.getTags);
 router.post('/addTag', controller.addTag);
-router.get('/deleteTagById/:id', controller.deleteTagById);
+router.post('/deleteTag', controller.deleteTag);
 router.post('/updateTag', controller.updateTag);
 
 module.exports = router;

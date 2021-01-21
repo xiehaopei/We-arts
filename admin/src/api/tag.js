@@ -1,7 +1,7 @@
 /*
  * @Author: Haopei Xie
  * @Date: 2020-12-20 20:22:43
- * @LastEditTime: 2020-12-23 16:28:25
+ * @LastEditTime: 2021-01-22 01:04:54
  * @LastEditors: Haopei Xie
  * @Description: Tag API
  * @FilePath: \We-arts\admin\src\api\tag.js
@@ -18,8 +18,8 @@ const addTag = (params) => {
   return axios.post(base.baseUrl + base.addTag, params)
 }
 
-const deleteTag = (id) => {
-  return axios.get(base.baseUrl + base.deleteTag + id)
+const deleteTag = (params) => {
+  return axios.post(base.baseUrl + base.deleteTag, params)
 }
 
 const updateTag = (id, params) => {
